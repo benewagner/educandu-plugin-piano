@@ -92,8 +92,7 @@ export default function PianoEditor({ content, onContentChanged }) {
   const handleIntervalCheckboxStateChanged = (event, exerciseType, checkboxStates, index) => {
     const [checkedState, newTests] = getCheckboxStateAndNewTests(event);
     const checkbox = event.target;
-    const interval = checkbox.interval;
-    const intervalType = checkbox.intervalType;
+    const { interval, intervaltype } = checkbox;
     const newCheckboxStates = cloneDeep(checkboxStates);
 
     const updateAllCheckboxStates = intervalSelector => {
@@ -109,10 +108,10 @@ export default function PianoEditor({ content, onContentChanged }) {
       if (typeof newCheckboxStates[intervalSelector].minor === 'undefined') {
         newCheckboxStates[intervalSelector] = checkedState;
       }
-      if (typeof newCheckboxStates[intervalSelector].minor !== 'undefined' && !!intervalType) {
-        newCheckboxStates[intervalSelector][intervalType] = checkedState;
+      if (typeof newCheckboxStates[intervalSelector].minor !== 'undefined' && !!intervaltype) {
+        newCheckboxStates[intervalSelector][intervaltype] = checkedState;
       }
-      if (typeof newCheckboxStates[intervalSelector].minor !== 'undefined' && !intervalType) {
+      if (typeof newCheckboxStates[intervalSelector].minor !== 'undefined' && !intervaltype) {
         newCheckboxStates[intervalSelector].minor = checkedState;
         newCheckboxStates[intervalSelector].major = checkedState;
       }
@@ -431,7 +430,7 @@ export default function PianoEditor({ content, onContentChanged }) {
                   <Checkbox
                     defaultChecked={checkboxStates[interval].minor}
                     interval={interval}
-                    intervalType="minor"
+                    intervaltype="minor"
                     onChange={event => handleIntervalCheckboxStateChanged(event, exerciseType, checkboxStates, testIndex)}
                     >
                     {t('minor')}
@@ -439,7 +438,7 @@ export default function PianoEditor({ content, onContentChanged }) {
                   <Checkbox
                     defaultChecked={checkboxStates[interval].major}
                     interval={interval}
-                    intervalType="major"
+                    intervaltype="major"
                     onChange={event => handleIntervalCheckboxStateChanged(event, exerciseType, checkboxStates, testIndex)}
                     >{t('major')}
                   </Checkbox>
