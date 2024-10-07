@@ -1,4 +1,8 @@
-1.1.0
+1.1.1
+
+- update dist folder
+
+  1.1.0
 
 - update dependencies and node version
 
