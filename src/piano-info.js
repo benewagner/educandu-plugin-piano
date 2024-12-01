@@ -1,9 +1,9 @@
 import joi from 'joi';
 import React from 'react';
-import cloneDeep from '@educandu/educandu/utils/clone-deep.js';
-import { couldAccessUrlFromRoom } from '@educandu/educandu/utils/source-utils.js';
-import GithubFlavoredMarkdown from '@educandu/educandu/common/github-flavored-markdown.js';
 import PianoIcon from './icons/piano-icon.js';
+import cloneDeep from '@educandu/educandu/utils/clone-deep.js';
+import GithubFlavoredMarkdown from '@educandu/educandu/common/github-flavored-markdown.js';
+import { isInternalSourceType, couldAccessUrlFromRoom } from '@educandu/educandu/utils/source-utils.js';
 
 class PianoInfo {
   static dependencies = [GithubFlavoredMarkdown];
@@ -162,16 +162,21 @@ class PianoInfo {
   redactContent(content, targetRoomId) {
     const redactedContent = cloneDeep(content);
 
-    redactedContent.text = this.gfm.redactCdnResources(
-      redactedContent.text,
-      url => couldAccessUrlFromRoom(url, targetRoomId) ? url : ''
-    );
+    if (!couldAccessUrlFromRoom(redactedContent.sourceUrl, targetRoomId)) {
+      redactedContent.sourceUrl = '';
+    }
 
     return redactedContent;
   }
 
   getCdnResources(content) {
-    return this.gfm.extractCdnResources(content.text);
+    const cdnResources = [];
+
+    if (isInternalSourceType({ url: content.sourceUrl })) {
+      cdnResources.push(content.sourceUrl);
+    }
+
+    return [...new Set(cdnResources)].filter(cdnResource => cdnResource);
   }
 }
 

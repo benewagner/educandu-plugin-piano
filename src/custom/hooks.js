@@ -13,6 +13,11 @@ export function useMidiDevice() {
   const [isMidiDeviceConnected, setIsMidiDeviceConnected] = useState(false);
 
   useEffect(() => {
+
+    if (!navigator.requestMIDIAccess) {
+      return;
+    }
+
     if (isMidiDeviceConnected) {
       return;
     }
@@ -61,9 +66,9 @@ export function useMidiData(src, clientConfig, sourceUrl, isInternalSourceType) 
 export function useMidiPlayer(midiData) {
   const midiPlayer = useRef(null);
   const midiPlayerHandler = useRef({
-    handleMidiPlayerEvent: () => {},
-    resetAllKeyStyles: () => {},
-    updateActiveNotes: () => {}
+    handleMidiPlayerEvent: () => { },
+    resetAllKeyStyles: () => { },
+    updateActiveNotes: () => { }
   });
 
   if (!midiPlayer.current && midiData) {
@@ -382,14 +387,16 @@ export function useExercise(content, currentTestIndex, currentExerciseIndex) {
         const midiNoteNameSequence = noteSequence.midiNoteNameSequence;
         const keyRange = getKeyRange({ midiNoteNameSequence, noteRange: noteSequence.noteRange });
 
-        return { keyRange,
+        return {
+          keyRange,
           midiNoteNameSequence,
           clef: noteSequence.clef,
           solution: noteSequence.filteredAbc,
           indication: noteSequence.abcNoteNameSequence[0],
           midiValueSequence: noteSequence.midiValueSequence,
           abcNoteNameSequence: noteSequence.abcNoteNameSequence,
-          indicationMidiValue: noteSequence.midiValueSequence[0] };
+          indicationMidiValue: noteSequence.midiValueSequence[0]
+        };
       }
 
       if (ut.isRandomNoteSequenceExercise(test)) {
@@ -470,7 +477,7 @@ export function useExercise(content, currentTestIndex, currentExerciseIndex) {
       indication: '',
       solution: ''
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // If getData was called as useState callback, server and client would generate different indicationMidiValues,

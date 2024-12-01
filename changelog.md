@@ -1,4 +1,8 @@
-1.1.1
+1.1.2
+
+- Catch Web MIDI Api not available in Safari
+
+  1.1.1
 
 - update dist folder
 
