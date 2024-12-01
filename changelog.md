@@ -1,4 +1,8 @@
-1.1.2
+1.1.3
+
+- Correct redactContent und getCdnResources
+
+  1.1.2
 
 - Catch Web MIDI Api not available in Safari
 
