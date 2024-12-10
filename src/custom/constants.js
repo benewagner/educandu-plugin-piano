@@ -231,3 +231,12 @@ export const CHORD_VECTOR_MAP = new Map([
   ['[2,5,8]', { type: 'halfDiminished', inversion: 'thirdInversion' }],
   ['[3,6,9]', { type: 'diminishedSeventh', inversion: 'anyInversion' }]
 ]);
+
+export const KEY_COLORS = {
+  blackKey: 'rgb(56, 56, 56)',
+  whiteKey: 'rgb(255, 255, 255)',
+  activeKey: '#82E2FF',
+  correct: '#94F09D',
+  answer: '#F9F793',
+  wrong: '#FF8D8D'
+};

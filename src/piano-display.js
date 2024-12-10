@@ -36,7 +36,8 @@ export default function PianoDisplay({ content }) {
   const { t } = useTranslation('benewagner/educandu-plugin-piano');
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
   const [playExerciseStartIndex, setPlayExerciseStartIndex] = useState(0);
-  const { sourceUrl, midiTrackTitle, colors, tests, sampleType } = content;
+  const { sourceUrl, midiTrackTitle, tests, sampleType } = content;
+  const colors = { ...C.KEY_COLORS };
 
   const src = getAccessibleUrl({ url: sourceUrl, cdnRootUrl: clientConfig.cdnRootUrl });
 
@@ -420,7 +421,7 @@ export default function PianoDisplay({ content }) {
           min={1}
           max={exerciseData.abcNoteNameSequence.length}
           onChange={value => { setPlayExerciseStartIndex(value - 1); }}
-          />
+        />
       </div>
     );
   };
@@ -451,7 +452,7 @@ export default function PianoDisplay({ content }) {
             onClick={() => {
               setCanShowSolution(prev => !prev);
             }}
-            >
+          >
             {canShowSolution ? t('hideSolution') : t('showSolution')}
           </Button>
           <Button className="Piano-btnNewExercise" onClick={resetEarTrainingControls}>{t('newExercise')}</Button>
@@ -472,7 +473,7 @@ export default function PianoDisplay({ content }) {
     midiPlayerHandler.current.updateActiveNotes = updateActiveNotes;
     midiPlayerHandler.current.handleMidiPlayerEvent = handleMidiPlayerEvent;
     midiPlayerHandler.current.resetAllKeyStyles = resetAllKeyStyles;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -504,7 +505,7 @@ export default function PianoDisplay({ content }) {
               onCardSelected={handleTestCardSelected}
               selectedCardIndex={currentTestIndex}
               treatSelectedCardAsVisited
-              />
+            />
           </div>
         </div>
       )}
@@ -563,7 +564,7 @@ export default function PianoDisplay({ content }) {
         isNoteInputEnabled={isNoteInputEnabled}
         isExercisePlayingRef={isExercisePlayingRef}
         answerMidiValueSequence={answerMidiValueSequence}
-        />
+      />
       <div className="Piano-controlsContainer">
         <div className="Piano-controlsWrapper">
           {!!sourceUrl && <h5 className="Piano-headlineMidi">MIDI</h5>}

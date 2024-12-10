@@ -1,4 +1,8 @@
-1.1.3
+1.1.4
+
+- Implement getGroups function for plugin selector dialog
+
+  1.1.3
 
 - Correct redactContent und getCdnResources
 

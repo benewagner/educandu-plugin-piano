@@ -1,6 +1,6 @@
 {
   "name": "@benewagner/educandu-plugin-piano",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "A piano plugin for educandu",
   "type": "module",
   "exports": {
@@ -23,12 +23,12 @@
   },
   "dependencies": {
     "midi-player-js": "^2.0.16",
-    "tone": "^14.7.77"
+    "tone": "^15.0.4"
   },
   "devDependencies": {
     "@ant-design/icons": "5.5.1",
     "@educandu/dev-tools": "^14.0.0",
-    "@educandu/educandu": "3.21.0",
+    "@educandu/educandu": "^3.26.0",
     "@educandu/node-jsx-loader": "^4.0.0",
     "@educandu/rooms-auth-lambda": "^6.2.1",
     "@vitest/coverage-v8": "^1.0.2",
@@ -45,7 +45,7 @@
   },
   "peerDependencies": {
     "@ant-design/icons": ">=5.5.1",
-    "@educandu/educandu": ">=3.21.0",
+    "@educandu/educandu": ">=3.26.0",
     "antd": ">=5.21.2",
     "joi": ">=17.11.0",
     "react": ">=18.2.0",

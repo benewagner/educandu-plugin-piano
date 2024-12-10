@@ -139,8 +139,8 @@ export function useToneJsSampler(sampleType) {
     };
 
     import('tone')
-      .then(module => {
-        document.toneJsSamplers[sampleType] = new module.Sampler({
+      .then(Tone => {
+        document.toneJsSamplers[sampleType] = new Tone.Sampler({
           urls: instrumentUrls[sampleType],
           onload: () => {
             setHasSamplerLoaded(true);

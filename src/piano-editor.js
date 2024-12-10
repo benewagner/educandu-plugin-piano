@@ -3,7 +3,7 @@ import * as ut from './custom/utils.js';
 import PianoInfo from './piano-info.js';
 import id from './educandu-code/unique-id.js';
 import { useTranslation } from 'react-i18next';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { pianoLayout } from './custom/piano.js';
 import { PlusOutlined } from '@ant-design/icons';
 import UrlInput from './educandu-code/url-input.js';
@@ -276,12 +276,14 @@ export default function PianoEditor({ content, onContentChanged }) {
     const abcString = string.length !== 0 ? string : 'C';
     const { abcNoteNameSequence, midiNoteNameSequence, midiValueSequence, filteredAbc } = ut.analyseABC(abcString);
     const newCustomNoteSequences = tests[testIndex].customNoteSequences.map((nS, i) => i === noteSequenceIndex
-      ? { ...nS,
+      ? {
+        ...nS,
         abc: abcString,
         abcNoteNameSequence,
         midiNoteNameSequence,
         midiValueSequence,
-        filteredAbc }
+        filteredAbc
+      }
       : nS);
     const newTests = tests.map((test, i) => i === testIndex ? { ...test, customNoteSequences: newCustomNoteSequences } : test);
     abcHasBeenInput.current = true;
@@ -344,7 +346,7 @@ export default function PianoEditor({ content, onContentChanged }) {
                   midiValue={elem[1]}
                   index={index}
                   colors={selectorPianoColors}
-                  />
+                />
               );
             }
             return <KeyWhite updateKeyRangeSelection={updateKeyRangeSelection} key={id.create()} midiValue={elem[1]} index={index} colors={selectorPianoColors} />;
@@ -371,7 +373,7 @@ export default function PianoEditor({ content, onContentChanged }) {
       className="Piano-whiteKeysCheckbox"
       defaultChecked={tests[index].whiteKeysOnly}
       onChange={event => handleWhiteKeysCheckboxStateChanged(event, index)}
-      >
+    >
       {t('whiteKeysOnly')}
     </Checkbox>
   );
@@ -388,7 +390,7 @@ export default function PianoEditor({ content, onContentChanged }) {
           range
           tooltip={{ formatter }}
           marks={{ 2: t('c1'), 9: t('c2'), 16: t('c3'), 23: t('c4'), 30: t('c5'), 37: t('c6'), 44: t('c7'), 51: t('c8') }}
-          />
+        />
         {ut.isRandomNoteSequenceExercise(tests[testIndex]) && renderWhiteKeysCheckbox(testIndex)}
       </FormItem>
     );
@@ -411,7 +413,7 @@ export default function PianoEditor({ content, onContentChanged }) {
             defaultChecked={checkboxStates.all}
             interval="all"
             onChange={event => handleIntervalCheckboxStateChanged(event, exerciseType, checkboxStates, testIndex)}
-            >{t('all')}
+          >{t('all')}
           </Checkbox>
         </div>
         {INTERVAL_NAMES.map((interval, index) => {
@@ -422,7 +424,7 @@ export default function PianoEditor({ content, onContentChanged }) {
                 className="Piano-checkbox"
                 interval={interval}
                 onChange={event => handleIntervalCheckboxStateChanged(event, exerciseType, checkboxStates, testIndex)}
-                >
+              >
                 {t(interval)}
               </Checkbox>
               {[1, 2, 6, 7].includes(index) && !tests[testIndex].whiteKeysOnly && (
@@ -432,7 +434,7 @@ export default function PianoEditor({ content, onContentChanged }) {
                     interval={interval}
                     intervaltype="minor"
                     onChange={event => handleIntervalCheckboxStateChanged(event, exerciseType, checkboxStates, testIndex)}
-                    >
+                  >
                     {t('minor')}
                   </Checkbox>
                   <Checkbox
@@ -440,7 +442,7 @@ export default function PianoEditor({ content, onContentChanged }) {
                     interval={interval}
                     intervaltype="major"
                     onChange={event => handleIntervalCheckboxStateChanged(event, exerciseType, checkboxStates, testIndex)}
-                    >{t('major')}
+                  >{t('major')}
                   </Checkbox>
                 </React.Fragment>
               )}
@@ -452,7 +454,7 @@ export default function PianoEditor({ content, onContentChanged }) {
         <Checkbox
           defaultChecked={tests[testIndex][`${exerciseType}AllowsLargeIntervals`]}
           onChange={event => { handleLargeIntervalsCheckboxStateChanged(event, testIndex); }}
-          >
+        >
           {t('intervalsPlusOctave')}
         </Checkbox>
       </FormItem>
@@ -461,13 +463,13 @@ export default function PianoEditor({ content, onContentChanged }) {
           <Checkbox
             defaultChecked={tests[testIndex].directionCheckboxStates.up}
             onChange={event => handleDirectionCheckboxStateChanged(event, 'up', testIndex)}
-            >
+          >
             {t('upwards')}
           </Checkbox>
           <Checkbox
             defaultChecked={tests[testIndex].directionCheckboxStates.down}
             onChange={event => handleDirectionCheckboxStateChanged(event, 'down', testIndex)}
-            >
+          >
             {t('downwards')}
           </Checkbox>
         </FormItem>
@@ -482,7 +484,7 @@ export default function PianoEditor({ content, onContentChanged }) {
           key={id.create()}
           defaultChecked={tests[index].allChordOptions}
           onChange={event => handleAllChordOptionsStateChanged(event, index)}
-          >
+        >
           {t('all')}
         </Checkbox>
       </FormItem>
@@ -493,7 +495,7 @@ export default function PianoEditor({ content, onContentChanged }) {
               key={id.create()}
               defaultChecked={tests[index].triadCheckboxStates[triad]}
               onChange={event => handleTriadCheckboxStateChanged(event, index, triad)}
-              >
+            >
               {t(triad)}
             </Checkbox>
           ))}
@@ -505,7 +507,7 @@ export default function PianoEditor({ content, onContentChanged }) {
             <Checkbox
               defaultChecked={tests[index].seventhChordCheckboxStates[chord]}
               onChange={event => handleSeventhChordCheckboxStateChanged(event, index, chord)}
-              >
+            >
               {t(chord)}
             </Checkbox>
           </div>
@@ -518,7 +520,7 @@ export default function PianoEditor({ content, onContentChanged }) {
               key={id.create()}
               defaultChecked={tests[index].inversionCheckboxStates[inversion]}
               onChange={event => handleInversionCheckboxStateChanged(event, index, inversion)}
-              >
+            >
               {t(inversion)}
             </Checkbox>
           ))}
@@ -528,7 +530,7 @@ export default function PianoEditor({ content, onContentChanged }) {
         <Checkbox
           defaultChecked={tests[index][`${tests[index].exerciseType}AllowsLargeIntervals`]}
           onChange={event => { handleLargeIntervalsCheckboxStateChanged(event, index); }}
-          >
+        >
           {t('allowLargeIntervals')}
         </Checkbox>
       </FormItem>
@@ -554,7 +556,7 @@ export default function PianoEditor({ content, onContentChanged }) {
         onMoveUp={() => handleMoveNoteSequenceUp(testIndex, index)}
         onMoveDown={() => handleMoveNoteSequenceDown(testIndex, index)}
         onDelete={() => handleDeleteNoteSequence(testIndex, index)}
-        >
+      >
         {renderNoteRangeSelector(testIndex, handleCustomNoteSequenceNoteRangeChanged, tests[testIndex].customNoteSequences[index].noteRange, index)}
         {renderClefTypeSelector(testIndex, noteSequence.clef, handleCustomNoteSequenceClefTypeChanged, index)}
         <AbcEditorItem
@@ -562,7 +564,7 @@ export default function PianoEditor({ content, onContentChanged }) {
           testIndex={testIndex}
           index={index}
           handleAbcCodeChanged={handleAbcCodeChanged}
-          />
+        />
       </ItemPanel>
     ));
   };
@@ -579,20 +581,34 @@ export default function PianoEditor({ content, onContentChanged }) {
               onAfterChange={event => handleNumberOfNotesValueChanged(event, index)}
               dots
               marks={{ 3: '3', 4: '4', 5: '5', 6: '6', 7: '7', 8: '8', 9: '9', 10: '10' }}
-              />
+            />
           </FormItem>
         )}
         {!tests[index].isCustomNoteSequence && renderIntervalSelector(tests[index].noteSequenceCheckboxStates, EXERCISE_TYPES.noteSequence, index)}
         {!!tests[index].isCustomNoteSequence && renderCustomNoteSequencePanels(index)}
         {!!tests[index].isCustomNoteSequence
-        && (
-          <Button type="primary" icon={<PlusOutlined />} onClick={() => handleAddCustomNoteSequenceButtonClick(index)}>
-            {t('addCustomNoteSequence')}
-          </Button>
-        )}
+          && (
+            <Button type="primary" icon={<PlusOutlined />} onClick={() => handleAddCustomNoteSequenceButtonClick(index)}>
+              {t('addCustomNoteSequence')}
+            </Button>
+          )}
       </React.Fragment>
     );
   };
+
+  useEffect(() => {
+
+    if (!content.colors) {
+      return;
+    }
+
+    const newContent = cloneDeep(content);
+    delete newContent.colors;
+
+    onContentChanged({ ...newContent });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>
@@ -615,7 +631,7 @@ export default function PianoEditor({ content, onContentChanged }) {
               onMoveUp={handleMoveTestUp}
               onMoveDown={handleMoveTestDown}
               onDelete={handleDeleteTest}
-              >
+            >
               <FormItem label={t('exerciseType')} {...FORM_ITEM_LAYOUT}>
                 <RadioGroup onChange={event => handleExerciseTypeValueChanged(event, index)} value={test.exerciseType}>
                   <RadioButton value={EXERCISE_TYPES.interval}>{t('interval')}</RadioButton>

@@ -2,6 +2,7 @@ import joi from 'joi';
 import React from 'react';
 import PianoIcon from './icons/piano-icon.js';
 import cloneDeep from '@educandu/educandu/utils/clone-deep.js';
+import { PLUGIN_GROUP } from '@educandu/educandu/domain/constants.js';
 import GithubFlavoredMarkdown from '@educandu/educandu/common/github-flavored-markdown.js';
 import { isInternalSourceType, couldAccessUrlFromRoom } from '@educandu/educandu/utils/source-utils.js';
 
@@ -20,6 +21,10 @@ class PianoInfo {
 
   getIcon() {
     return <PianoIcon />;
+  }
+
+  getGroups() {
+    return [PLUGIN_GROUP.interactive];
   }
 
   async resolveDisplayComponent() {
