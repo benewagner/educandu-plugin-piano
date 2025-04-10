@@ -1,6 +1,6 @@
 import * as ut from './utils.js';
 import * as C from './constants.js';
-import id from '../educandu-code/unique-id.js';
+import id from '@educandu/educandu/utils/unique-id.js';
 import Logger from '@educandu/educandu/common/logger.js';
 import HttpClient from '@educandu/educandu/api-clients/http-client.js';
 import { useEffect, useState, useCallback, useMemo, useRef } from 'react';
