@@ -4,19 +4,18 @@ import * as C from './custom/constants.js';
 import StopIcon from './icons/stop-icon.js';
 import CustomSwitch from './custom/switch.js';
 import { useTranslation } from 'react-i18next';
-import PlayIcon from './educandu-code/play-icon.js';
 import BackspaceIcon from './icons/backspace-icon.js';
 import { Button, Radio, InputNumber, Slider } from 'antd';
-import AbcNotation from './educandu-code/abc-notation.js';
 import React, { useEffect, useRef, useState } from 'react';
-import CardSelector from './educandu-code/card-selector.js';
+import AbcNotation from '@educandu/educandu/components/abc-notation.js';
 import ClientConfig from '@educandu/educandu/bootstrap/client-config.js';
+import CardSelector from '@educandu/educandu/components/card-selector.js';
 import { useService } from '@educandu/educandu/components/container-context.js';
 import { sectionDisplayProps } from '@educandu/educandu/ui/default-prop-types.js';
+import PlayIcon from '@educandu/educandu/components/icons/media-player/play-icon.js';
+import PauseIcon from '@educandu/educandu/components/icons/media-player/pause-icon.js';
 import { getAccessibleUrl, isInternalSourceType } from '@educandu/educandu/utils/source-utils.js';
 import { useMidiData, usePianoId, useToneJsSampler, useMidiDevice, useExercise, useMidiPlayer } from './custom/hooks.js';
-
-import PauseIcon from './educandu-code/pause-icon.js';
 
 export default function PianoDisplay({ content }) {
 

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import id from '../educandu-code/unique-id.js';
 import React, { useEffect, useRef } from 'react';
+import id from '@educandu/educandu/utils/unique-id.js';
 import { KeyWhite, KeyWhiteWithBlack } from './keys.js';
 import { EXERCISE_TYPES, MIDI_NOTE_NAMES } from './constants.js';
 

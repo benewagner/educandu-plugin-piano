@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import { Form, Input } from 'antd';
 import { useTranslation } from 'react-i18next';
 import React, { useRef, useState } from 'react';
-import AbcNotation from '../educandu-code/abc-notation.js';
 import { filterAbcString, getNumberOfAbcNotes } from './utils.js';
+import AbcNotation from '@educandu/educandu/components/abc-notation.js';
 import { FORM_ITEM_LAYOUT } from '@educandu/educandu/domain/constants.js';
 
 function CustomAbcNotation({ clef, initialAbc, abcRef }) {

@@ -1,21 +1,21 @@
 /* eslint-disable max-lines */
 import * as ut from './custom/utils.js';
 import PianoInfo from './piano-info.js';
-import id from './educandu-code/unique-id.js';
 import { useTranslation } from 'react-i18next';
-import React, { useState, useRef, useEffect } from 'react';
 import { pianoLayout } from './custom/piano.js';
 import { PlusOutlined } from '@ant-design/icons';
-import UrlInput from './educandu-code/url-input.js';
-import ItemPanel from './educandu-code/item-panel.js';
+import id from '@educandu/educandu/utils/unique-id.js';
 import AbcEditorItem from './custom/abc-editor-item.js';
-import { cloneDeep } from './educandu-code/resources.js';
+import React, { useState, useRef, useEffect } from 'react';
+import cloneDeep from '@educandu/educandu/utils/clone-deep.js';
 import { KeyWhite, KeyWhiteWithBlack } from './custom/keys.js';
+import UrlInput from '@educandu/educandu/components/url-input.js';
+import ItemPanel from '@educandu/educandu/components/item-panel.js';
 import { FORM_ITEM_LAYOUT } from '@educandu/educandu/domain/constants.js';
-import { swapItemsAt, removeItemAt } from './educandu-code/array-utils.js';
 import { Form, Input, Radio, Button, Slider, Checkbox, Divider } from 'antd';
 import { useService } from '@educandu/educandu/components/container-context.js';
 import { sectionEditorProps } from '@educandu/educandu/ui/default-prop-types.js';
+import { swapItemsAt, removeItemAt } from '@educandu/educandu/utils/array-utils.js';
 import { EXERCISE_TYPES, INTERVAL_NAMES, TRIADS, SEVENTH_CHORDS, INVERSIONS } from './custom/constants.js';
 
 export default function PianoEditor({ content, onContentChanged }) {
