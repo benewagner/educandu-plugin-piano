@@ -1,4 +1,8 @@
-1.1.4
+1.1.5
+
+- Update imports for educandu code
+
+  1.1.4
 
 - Implement getGroups function for plugin selector dialog
 
